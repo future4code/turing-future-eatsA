@@ -7,7 +7,9 @@ export const user = {
     email: '',
     cpf: "",
     password: "",
+    token: '',
 }
+
 
 export const useUserInfo = () =>{
     const [userData, setUserData] = useState(user);
@@ -17,7 +19,7 @@ export const useUserInfo = () =>{
 
         setUserData({...userData, [name] : value})
     }       
-    return {userData, onChangeUserData}
+    return {userData, onChangeUserData, setUserData}
 }
 
 export const UserContext = React.createContext();
