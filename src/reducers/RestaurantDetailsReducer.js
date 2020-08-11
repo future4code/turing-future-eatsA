@@ -6,7 +6,7 @@ export const initialState = {
 export const RestaurantDetailsReducer = (state, action) => {
     switch(action.type) {
         case "Renderizar":
-            return {restaurantDetails: action.restaurant}
+            return {restaurantDetails: action.restaurant, restaurantProducts: action.restaurant.products}
         default:
             return state
     }

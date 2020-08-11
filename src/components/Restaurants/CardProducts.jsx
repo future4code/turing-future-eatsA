@@ -1,31 +1,84 @@
-import React, { useContext, useState } from 'react'
-import styled from 'styled-components'
+import React, { useContext, useState, useEffect } from 'react'
 
-import RestaurantDetailsContext from '../../contexts/RestaurantDetailsContext'
-import { useEffect } from 'react'
+import { ContainerCategorias, TituloDasCategorias, ImagemDoProduto, TituloDoProduto, DescricaoDoProduto, 
+        PrecoDoProduto, BotaoAdicionarProduto, ContainerProduct, ContainerInfoProduct} from './CardProductsStyle'
+
+import RestaurantListProductsContext from '../../contexts/RestaurantListProductsContext'
+
+import CardAddProductCart from './CardAddProductCart'
 
 function CardProducts() {
 
-    const restaurantDetails = useContext(RestaurantDetailsContext)
-    
-    const [category, setCategory] = useState([])
+    const restaurantProducts = useContext(RestaurantListProductsContext) 
+    const [categorys, setCategorys] = useState([])
+    const [windowAddItemCart, setWindowAddItemCart] = useState(false) 
 
     useEffect(() => {
-        createCategory()
-    }, [])
+        pegaCategorias()
+    }, [restaurantProducts])
 
-    const createCategory = () => {
-        restaurantDetails.products.map((product) => {
-            console.log(product.category)
+    const pegaCategorias = () => {
+        const arrayPegaCategorias = []
+        
+
+        restaurantProducts.map((product) => {
+            arrayPegaCategorias.push(product.category)
         })
+
+        const arrayRemoveRepetidos = [ ...new Set(arrayPegaCategorias) ]
+        setCategorys(arrayRemoveRepetidos)
     }
 
-    console.log(restaurantDetails.products)
+    const onClickAddCart = (product) => {
+        setWindowAddItemCart(true)
+    }
+
+    const onClickCloseAddCart = () => {
+        setWindowAddItemCart(false)
+    }
+
+    const renderizaNaTela = () => {
+        if (windowAddItemCart) {
+            return (
+                <CardAddProductCart 
+                    onClickCloseAddCart={onClickCloseAddCart}
+                />
+            )
+        }
+    }
 
     return (
-        <div>
-            
-        </div>
+        <ContainerCategorias>
+            {categorys.map((category) => {
+                return (
+                    <div key={category}>
+                        <TituloDasCategorias>{category}</TituloDasCategorias>
+                        <hr></hr>
+                        {restaurantProducts.map((product) => {
+                             if (product.category === category) {
+                                 return (
+                                     <ContainerProduct key={product.id}>
+                                        <div>
+                                            <ImagemDoProduto src={product.photoUrl}></ImagemDoProduto>
+                                        </div>
+                                        <ContainerInfoProduct>
+                                            <TituloDoProduto>{product.name}</TituloDoProduto>
+                                            <DescricaoDoProduto>{product.description}</DescricaoDoProduto>
+                                            <PrecoDoProduto>R$ {product.price}</PrecoDoProduto>
+                                        </ContainerInfoProduct>
+                                        <BotaoAdicionarProduto onClick={() => onClickAddCart(product)}>
+                                            Adicionar
+                                        </BotaoAdicionarProduto>
+                                     </ContainerProduct>    
+                                 )
+                             }
+                        })}
+                    </div>
+                )
+            })}
+            {renderizaNaTela()}
+        </ContainerCategorias>
+
     )
 }
 
