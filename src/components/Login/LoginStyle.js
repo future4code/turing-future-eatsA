@@ -9,7 +9,6 @@ export const useStyles = makeStyles({
 
         '& .MuiTextField-root': {
             marginBottom: '16px',
-            
         },
     },
 
@@ -18,18 +17,13 @@ export const useStyles = makeStyles({
 export const Container = styled.div`
     display: flex;
     width: 100%;
-    height: fit-content;
-    padding: 0 32px;
+    height: 50vh;
+    padding: 0 16px;
     flex-flow: column wrap;
 `;
 
-export const TextContainer = ({margin, children}) => {
-    const Text = styled.div`
+export const TextContainer = styled.div`
             align-self: center;
-            margin: ${margin || '0px'};
-        `
-    return <Text>{children}</Text>;
-}; 
-
-
+            margin: '16px';
+ `
 

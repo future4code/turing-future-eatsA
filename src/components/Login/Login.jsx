@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useContext }  from 'react';
 import Axios from 'axios';
-
-import { useContext } from 'react';
 
 import {UserContext}  from '../../contexts/UserInforContext'
 
-import {Container, useStyles, TextContainer} from './LoginStyle'
+import {Container, useStyles, TextContainer, ImgContainer} from './LoginStyle'
 
 
 import {Button, TextField, Typography} from '@material-ui/core'
@@ -16,7 +14,7 @@ const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/futureEats
 
 export default props =>{
     const history =  useHistory();
-    const {userData, onChangeUserData,} = useContext(UserContext);
+    const {userData, onChangeUserData, setUserData} = useContext(UserContext);
     const [userErro, setUserErro ] = useState(false);
     const [passwordErro, setPasswordErro ] = useState(false);
     const classes = useStyles();
@@ -25,11 +23,13 @@ export default props =>{
         event.preventDefault();
         Axios.post(baseUrl, { email: userData.email, password: userData.password} )
             .then( response => {
-                userData = response.data
+                setUserData(response.data);
+                history.push('/home');  
                 setUserErro(false)
                 setPasswordErro(false)
             })
             .catch( error => {
+                console.log(error)
                 setUserErro(true)
                 setPasswordErro(true)
             });
@@ -75,10 +75,12 @@ export default props =>{
                     variant='contained'
                     type='submmit'
                     >Logar</Button>
-                <TextContainer margin='16px'>
-                    <Typography  className={classes.text}>Não possui cadastro? <Button>Clique aqui.</Button></Typography>
-                </TextContainer>    
             </form>
+                <TextContainer margin='16px'>
+                <Button onClick={() => history.push('/SignUp')}>
+                    <Typography  className={classes.text}>Não possui cadastro? Clique aqui.</Typography>
+                </Button>
+                </TextContainer>    
         </Container>
     );
 
