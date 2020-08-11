@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <UserContext.Provider value={{userData, onChangeUserData,}} >
+    <UserContext.Provider value={{userData, onChangeUserData,setUserData}} >
       <BrowserRouter>
           <Switch>
             <Route exact path="/">

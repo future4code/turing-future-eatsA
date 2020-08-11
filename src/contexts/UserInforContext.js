@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 
 
 export const user = {
-    name: "",
-    email: '',
-    cpf: "",
-    password: "",
-    token: '',
+    user: {
+        id: "",
+        name: "",
+        email: "",
+        cpf: "",
+        hasAddress: false
+    },
+    token: ""
 }
 
 
