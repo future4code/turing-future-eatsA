@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from './pages/Home';
 import SignUp from './components/SignUp/SignUp';
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
 
+
 function App() {
-  const {userData, onChangeUserData} = useUserInfo();
-  
+  const {userData, onChangeUserData, setUserData} = useUserInfo();
+
+
   return (
-    <UserContext.Provider value={{userData, onChangeUserData}} >
+    <UserContext.Provider value={{userData, onChangeUserData,}} >
       <BrowserRouter>
           <Switch>
             <Route exact path="/">

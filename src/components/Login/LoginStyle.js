@@ -23,12 +23,12 @@ export const Container = styled.div`
     flex-flow: column wrap;
 `;
 
-export const TextContainer = props => {
+export const TextContainer = ({margin, children}) => {
     const Text = styled.div`
             align-self: center;
-            margin: ${props.margin || '0px'};
+            margin: ${margin || '0px'};
         `
-    return <Text>{props.children}</Text>;
+    return <Text>{children}</Text>;
 }; 
 
 
