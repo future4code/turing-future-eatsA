@@ -7,6 +7,7 @@ const Rectangle = styled.div`
     border-radius: 8px;
     border: solid 1px #b8b8b8;
     padding-bottom: 8px;
+    margin: 4px;
 `
 const Image = styled.img`
     width: 328px;
