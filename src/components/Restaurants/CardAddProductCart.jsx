@@ -37,11 +37,11 @@ const tema = createMuiTheme({
 export default function CardAddProductCard(props) {
 
   const classes = useStyles();
-  const [quantify, setQuantify] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [open, setOpen] = useState(true)
 
   const handleChange = (event) => {
-    setQuantify(event.target.value);
+    setQuantity(event.target.value);
   }
 
   return (
@@ -61,9 +61,9 @@ export default function CardAddProductCard(props) {
                 <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    value={quantify}
+                    value={quantity}
                     onChange={handleChange}
-                    label="quantify"
+                    label="quantity"
                 >
                     <MenuItem value="0">0</MenuItem>
                     <MenuItem value="1">1</MenuItem>
@@ -80,7 +80,7 @@ export default function CardAddProductCard(props) {
             </FormControl>
         </DialogContent>
         <DialogActions>
-          <StyledButton color="secondary" onClick={props.onClickCloseAddCart}>
+          <StyledButton color="secondary" onClick={() => props.onClickCloseAddCart(quantity)}>
             ADICIONAR AO CARRINHO
           </StyledButton>
         </DialogActions>
