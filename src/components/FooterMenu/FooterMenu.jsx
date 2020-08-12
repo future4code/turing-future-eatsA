@@ -27,10 +27,10 @@ export default function FooterMenu() {
     return (
         <FooterContainer>
             <HomeIconActive />
-            <HomeOutlinedIcon color={'disabled'}/>
-            <ShoppingIconActive />
+            {/* <HomeOutlinedIcon color={'disabled'}/> */}
+            {/* <ShoppingIconActive /> */}
             <ShoppingCartOutlinedIcon color={'disabled'} />
-            <PersonIconActive />
+            {/* <PersonIconActive /> */}
             <PersonOutlineOutlinedIcon color={'disabled'} />
         </FooterContainer>
     )

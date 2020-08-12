@@ -40,6 +40,7 @@ export default props =>{
                 <CardFood />
                 <CardFood />
                 <CardFood />
+                <CardFood />
             </CardFoodContainer>
             <FooterMenu />
         </Container>
