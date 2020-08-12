@@ -3,12 +3,13 @@ import styled from 'styled-components'
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
 const Rectangle = styled.div`
-    width: 328px;
-    height: 56px;
+    width: 90vw;
+    height: 8vh;
     border-radius: 2px;
-    border: solid 1px #b8b8b8;
+    border: solid 1px lightgrey;
     display: flex;
     align-items: center;
+    margin: 8px 16px;
 `
 const RastauranteInput = styled.input`
     outline: none;
@@ -22,7 +23,7 @@ export default function SearchBar() {
 
     return (
         <Rectangle>
-            <SearchIcon /><RastauranteInput placeholder={'Restaurante'} />
+            <SearchIcon color={'disabled'}/><RastauranteInput placeholder={'Restaurante'} />
         </Rectangle>
     )
 }
