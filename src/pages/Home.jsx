@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 import styled from 'styled-components'
 import {Container, ImgContainer} from './styles/Home'
 import SearchBar from '../components/SearchBar/SearchBar'
@@ -7,6 +8,7 @@ import FoodTypeBar from '../components/FoodTypeBar/FoodTypeBar'
 import CardFood from '../components/CardFood/CardFood'
 import HeaderTitle from '../components/HeaderTitle/HeaderTitle'
 import FooterMenu from '../components/FooterMenu/FooterMenu'
+
 
 const CardFoodContainer = styled.div`
     height: 70vh;

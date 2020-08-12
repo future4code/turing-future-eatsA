@@ -3,15 +3,20 @@ import React, { useState } from 'react';
 
 
 export const user = {
-    user: {
         id: "",
         name: "",
         email: "",
         cpf: "",
-        hasAddress: false
-    },
-    token: ""
+        hasAddress: false,
+        token: "",
+        street: "",
+        number: "",
+        neighbourhood: "",
+        city: "",
+        state: "",
+        complement: ""
 }
+
 
 
 export const useUserInfo = () =>{
