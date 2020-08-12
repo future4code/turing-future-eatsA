@@ -1,7 +1,8 @@
 import React, { useReducer } from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import Home from './pages/Home';
-import SignUp from './components/SignUp/SignUp';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Address from './pages/Address'
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
 
@@ -15,10 +16,13 @@ function App() {
       <BrowserRouter>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Login />
             </Route>
-            <Route exact path="/signup">
+            <Route exact path="/SignUp">
               <SignUp />
+            </Route>
+            <Route exact path="/SignUp/Addres">
+              <Address />
             </Route>
             <Route path="/">
               <div>Opa! Erro 404!</div>
