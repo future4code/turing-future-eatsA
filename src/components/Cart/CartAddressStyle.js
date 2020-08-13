@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const ContainerCartAddress = styled.div
 `
-margin: 0 0 0 0;
-width: 360px;
-height: 76px;
+margin: 0;
+width: 100vw;
+height: 9.7vh;
 background-color: #eeeeee;
 display: flex;
 flex-direction: column;
@@ -13,9 +13,9 @@ justify-content: center;
 
 export const TituloDoContainer = styled.h5
 `
-margin: 16px 0 0 16px;
+margin: 2vh 0 0 4.4vw;
 font-family: Roboto;
-font-size: 16px;
+font-size: 2vh;
 font-weight: normal;
 font-stretch: normal;
 font-style: normal;
@@ -26,9 +26,9 @@ color: #b8b8b8;
 
 export const InfoAddress = styled.p
 `
-margin: 8px 0 16px 16px;
+margin: 1vh 0 2vh 4.4vw;
 font-family: Roboto;
-font-size: 16px;
+font-size: 2vh;
 font-weight: normal;
 font-stretch: normal;
 font-style: normal;

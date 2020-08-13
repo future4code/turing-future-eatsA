@@ -12,13 +12,14 @@ function CartAddress() {
     const userContext = useContext(UserContext)
     const [street, setStreet] = useState("")
     const [number, setNumber] = useState("")
-
+    
     useEffect(() => {
         getFullAddress()
     }, [])
 
     const getFullAddress = () => {
         const token = window.localStorage.getItem("token")
+
         axios.get(`${baseUrl}profile/address`, {
             headers: {
                 auth: token

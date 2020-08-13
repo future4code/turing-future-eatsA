@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const ContainerCardActiveOrder = styled.div
 `
 background-color: #5cb646;
-width: 360px;
-height: 118px;
+width: 100vw;
+height: 15vh;
 display: flex;
 align-items: center;
 position: fixed;
@@ -13,14 +13,14 @@ bottom: 0;
 
 export const ContainerSchedule = styled.div
 `
-margin: 0 0 0 24px;
+margin: 0 0 0 6.6vw;
 `
 
 export const ContainerInfoPedido = styled.div
 `
-margin-left: 24px;
-width: 256px;
-height: 118px;
+margin-left: 6.6vw;
+width: 71.1vw;
+height: 15vh;
 display: flex;
 flex-direction: column;
 justify-content: space-evenly;
@@ -30,7 +30,7 @@ export const Pedido = styled.p
 `
 margin: 0;
 font-family: Roboto;
-font-size: 16px;
+font-size: 2vh;
 font-weight: normal;
 font-stretch: normal;
 font-style: normal;
@@ -43,7 +43,7 @@ export const Restaurante = styled.p
 `
 margin: 0;
 font-family: Roboto;
-font-size: 16px;
+font-size: 2vh;
 font-weight: normal;
 font-stretch: normal;
 font-style: normal;
@@ -56,7 +56,7 @@ export const SubTotal = styled.p
 `
 margin: 0;
 font-family: Roboto;
-font-size: 16px;
+font-size: 2vh;
 font-weight: bold;
 font-stretch: normal;
 font-style: normal;
