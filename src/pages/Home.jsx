@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
+import SearchBar from '../components/SearchBar/SearchBar';
+import FoodTypeBar from '../components/FoodTypeBar/FoodTypeBar';
+import CardFood from '../components/CardFood/CardFood';
+import HeaderTitle from '../components/HeaderTitle/HeaderTitle';
+import FooterMenu from '../components/FooterMenu/FooterMenu';
+import { Container, FoodTypeBarContainer, CardFoodContainer } from './styles/Home'
+import useGetRestaurants from "../hooks/useGetRestaurants";
+import { useHistory } from "react-router-dom";
 
+const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/futureEatsA'
 
-import styled from 'styled-components'
-import {Container, ImgContainer} from './styles/Home'
-import SearchBar from '../components/SearchBar/SearchBar'
-import FoodTypeBar from '../components/FoodTypeBar/FoodTypeBar'
-import CardFood from '../components/CardFood/CardFood'
-import HeaderTitle from '../components/HeaderTitle/HeaderTitle'
-import FooterMenu from '../components/FooterMenu/FooterMenu'
+export default props => {
+    const history = useHistory();
+    const [restaurantsList, getRestaurants] = useGetRestaurants(
+    `${baseUrl}/restaurants`, [], 'restaurants' 
+  )
 
+  useEffect(() => {
+    const token = window.localStorage.getItem("token")
 
-const CardFoodContainer = styled.div`
-    height: 70vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-`
-const FoodTypeBarContainer = styled.div`
-    height: 6vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-`
-
-export default props =>{
+    if (token === null) {
+      history.push("/")
+    } else {
+    }
+  }, [history])
 
     return (
         <Container>
@@ -37,12 +33,7 @@ export default props =>{
                 <FoodTypeBar />
             </FoodTypeBarContainer>
             <CardFoodContainer>
-                <CardFood />
-                <CardFood />
-                <CardFood />
-                <CardFood />
-                <CardFood />
-                <CardFood />
+                <CardFood restaurantsList={restaurantsList}/>
             </CardFoodContainer>
             <FooterMenu />
         </Container>

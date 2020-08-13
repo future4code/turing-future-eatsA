@@ -3,7 +3,8 @@ import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
-import Address from './pages/Address'
+import Address from './pages/Address';
+import Home from './pages/Home'
 
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
@@ -17,7 +18,13 @@ function App() {
     <UserContext.Provider value={{userData, onChangeUserData,setUserData}} >
       <BrowserRouter>
           <Switch>
-            <Route exact path="/">
+            {/* <Route exact path="/">
+              <LandingPage />
+            </Route> */}
+            <Route exact path="/Home">
+              <Home />
+            </Route>
+            <Route exact path="/login">
               <Login />
             </Route>
             <Route exact path="/SignUp">
