@@ -29,8 +29,7 @@ function CardProducts() {
 
     const pegaCategorias = () => {
         const arrayPegaCategorias = []
-        
-
+    
         restaurantProducts.map((product) => {
             arrayPegaCategorias.push(product.category)
         })

@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
 import axios from 'axios'
+import { useHistory, useParams } from 'react-router-dom'
 
 import { initialState, RestaurantDetailsReducer} from '../../reducers/RestaurantDetailsReducer'
 
@@ -11,19 +12,22 @@ import CardProducts from './CardProducts'
 import CardActiveOrder from './CardActiveOrder'
 
 export const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/"
-export const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN6RGU0bGJnQ3BKQjBKTXBKa1pSIiwibmFtZSI6Ikp1bGlvIiwiZW1haWwiOiJqdWxpb2dhYnJpZWxAb3V0bG9vay5jb20iLCJjcGYiOiIyNTYuNDcxLjExNS00OCIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJSLiBBZm9uc28gQnJheiwgMTc3LCA3MSAtIFZpbGEgTi4gQ29uY2Vpw6fDo28iLCJpYXQiOjE1OTcwNzA3NTN9.GT6nJ4TvMQVl35AyQeFXaliR2PSMqQGAFpllHJxQ9Cg"
+/*export const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN6RGU0bGJnQ3BKQjBKTXBKa1pSIiwibmFtZSI6Ikp1bGlvIiwiZW1haWwiOiJqdWxpb2dhYnJpZWxAb3V0bG9vay5jb20iLCJjcGYiOiIyNTYuNDcxLjExNS00OCIsImhhc0FkZHJlc3MiOnRydWUsImFkZHJlc3MiOiJSLiBBZm9uc28gQnJheiwgMTc3LCA3MSAtIFZpbGEgTi4gQ29uY2Vpw6fDo28iLCJpYXQiOjE1OTcwNzA3NTN9.GT6nJ4TvMQVl35AyQeFXaliR2PSMqQGAFpllHJxQ9Cg"*/
 const idRestaurant = "1" 
 
 function Restaurants() {
 
     const [state, dispatch] = useReducer(RestaurantDetailsReducer, initialState)
+    const history = useHistory()
+    const pathParams = useParams()
 
     useEffect(() => {
         getRestaurantDetail()
     }, [])
 
     const getRestaurantDetail = () => {
-        axios.get(`${baseUrl}restaurants/${idRestaurant}`, {
+        const token = window.localStorage.getItem("token")
+        axios.get(`${baseUrl}restaurants/${pathParams.id}`, {
             headers: {
               auth: token  
             }
@@ -32,7 +36,6 @@ function Restaurants() {
            handleRestaurantDetails(response.data.restaurant)
         })
         .catch((error) => {
-            console.log("entrei no erro")
             alert(error.message)
         })
     }

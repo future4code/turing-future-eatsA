@@ -1,20 +1,13 @@
-import React, {useContext, useReducer} from 'react'
-import styled from 'styled-components'
+import React, { useContext, useReducer } from 'react'
 
+import { BotaoRemover, Quantidade, ContainerCart, ContainerCarrinhoVazio } from './CartStyle'
 import { ContainerProduct, ImagemDoProduto, ContainerInfoProduct, TituloDoProduto, DescricaoDoProduto, PrecoDoProduto } from '../Restaurants/CardProductsStyle'
-import { BotaoRemover, Quantidade, ContainerCart, ContainerCarrinhoVazio, ContainerCartGeral} from './CartStyle'
 
 import CartContext from '../../contexts/CartContext'
 
-import CartAddress from './CartAddress'
-import CartRestaurant from './CartRestaurant'
-import CartValues from './CartValues'
-import CartPayment from './CartPayment'
-import CartRenderProducts from './CartRenderProducts'
+function CartRenderProducts() {
 
-function Cart() {
-
-    /*const cartContext = useContext(CartContext)
+    const cartContext = useContext(CartContext)
     const dispatch = cartContext.dispatch
 
     const onClickRemoveProduct = (product) => {
@@ -56,17 +49,13 @@ function Cart() {
                 </ContainerCarrinhoVazio>
             )
         }
-    }*/
+    }
 
-    return(
-        <ContainerCartGeral>
-            <CartAddress />
-            <CartRestaurant />
-            <CartRenderProducts /> 
-            <CartValues />
-            <CartPayment />
-        </ContainerCartGeral>
+    return (
+        <div>
+            {renderizaNaTela()}
+        </div>
     )
 }
 
-export default Cart
+export default CartRenderProducts
