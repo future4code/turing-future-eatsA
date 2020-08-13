@@ -21,7 +21,6 @@ export default props => {
 
     if (token === null) {
       history.push("/")
-    } else {
     }
   }, [history])
 

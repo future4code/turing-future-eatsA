@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { Rectangle, Image, Restaurante, TempoDeEntrega, TaxaDeEntrega } from '../CardFood/CardFood'
+import { Rectangle, Image, Restaurante, TempoDeEntrega, TaxaDeEntrega } from '../CardFood/CardFoodStyle'
 
 
 export default function CardFood(props) {
