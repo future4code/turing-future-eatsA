@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import Axios from 'axios';
 
 import {Container, useStyles, Form } from './AddressStyle';
 import {UserContext}  from '../../contexts/UserInforContext'
+
+import {initialState, FormValidationReducer} from '../../reducers/FormsValidationReducers'
 
 import { TextField, Button, Typography, IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -13,10 +15,10 @@ export default props =>{
     const classes = useStyles();
     const history = useHistory();
     const {userData, onChangeUserData, setUserData} = useContext(UserContext);
+    const [state, dispatch] = useReducer(FormValidationReducer, initialState);
     const token = localStorage.getItem('token');
 
    const addAddres = event =>{
-       console.log(token);
         event.preventDefault();
        const body = {
         street: userData.street,
@@ -56,6 +58,7 @@ export default props =>{
                 <TextField 
                     onChange={onChangeUserData}
                     value={userData.street}
+                    error={state.street}
                     name='street'
                     variant='outlined'
                     label='logradouro'
