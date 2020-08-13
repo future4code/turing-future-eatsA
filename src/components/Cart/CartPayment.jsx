@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import axios from 'axios'
 
 import { ContainerCartPayment, Titulo, BotaoConfirmar } from './CartPaymentStyle'
+
+import { baseUrl } from  '../Restaurants/Restaurants'
+
+import CartContext from '../../contexts/CartContext'
 
 import { makeStyles } from '@material-ui/core/styles'
 import {createMuiTheme, MuiThemeProvider } from "@material-ui/core"
@@ -33,6 +38,9 @@ function CartPayment() {
 
     const classes = useStyles()
     const [value, setValue] = useState("")
+    const cartContext = useContext(CartContext)
+
+    console.log(cartContext.state.productsInCart)
   
     const handleRadioChange = (event) => {
       setValue(event.target.value)
@@ -41,6 +49,44 @@ function CartPayment() {
     const handleSubmit = (event) => {
         console.log(value)
         event.preventDefault()
+    }
+
+    const postPlaceOrder = () => {
+
+      const token = window.localStorage.getItem("token")
+
+      const products = () => {
+        let array = []
+        cartContext.state.productsInCart.map((product) => {
+          array.push(product.id, product.quantity)
+        })
+        console.log(array)
+      }
+      
+      products()
+
+      const body = {
+        "products": [{
+          "id": "CnKdjU6CyKakQDGHzNln",
+          "quantity": 10
+        }, {
+          "quantity": 1,
+          "id": "KJqMl2DxeShkSBevKVre"
+        }],
+        "paymentMethod": "creditcard"
+      }
+
+      axios.post(`${baseUrl}restaurants/:restaurantId/order`, body, {
+        headers: {
+          auth: token
+        }
+      })
+      .then((response) => {
+        
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
     }
 
     return (
