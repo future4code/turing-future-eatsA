@@ -35,6 +35,12 @@ export default function FoodTypeBar() {
         <FilterContainer>
             <ActiveFilter>ActiveFilter</ActiveFilter>
             <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
+            <InativeFilter>InativeFilter</InativeFilter>
         </FilterContainer>
     )
 }

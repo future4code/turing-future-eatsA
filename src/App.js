@@ -1,9 +1,11 @@
 import React, { useReducer } from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
+import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Address from './pages/Address';
 import Home from './pages/Home'
+
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
 
@@ -28,6 +30,8 @@ function App() {
             <Route exact path="/SignUp">
               <SignUp />
             </Route>
+            <Route exact path="/restaurant">
+              <CardRestaurant />
             <Route exact path="/SignUp/Addres">
               <Address />
             </Route>
