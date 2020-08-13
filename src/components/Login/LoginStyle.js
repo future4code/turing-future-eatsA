@@ -16,7 +16,7 @@ export const useStyles = makeStyles({
 
 export const Container = styled.div`
     display: flex;
-    width: 100%;
+    width: 90%;
     height: 50vh;
     padding: 0 16px;
     flex-flow: column wrap;
@@ -24,6 +24,10 @@ export const Container = styled.div`
 
 export const TextContainer = styled.div`
             align-self: center;
-            margin: '16px';
+            margin:  0 0 20px 0;
  `
 
+export const BottomTextContainer = styled.div`
+            align-self: center;
+            margin: 16px 0;
+ `

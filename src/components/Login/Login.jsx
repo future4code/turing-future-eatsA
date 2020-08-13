@@ -3,7 +3,7 @@ import Axios from 'axios';
 
 import {UserContext}  from '../../contexts/UserInforContext'
 
-import {Container, useStyles, TextContainer, ImgContainer} from './LoginStyle'
+import {Container, useStyles, TextContainer, BottomTextContainer} from './LoginStyle'
 
 
 import {Button, TextField, Typography} from '@material-ui/core'
@@ -23,7 +23,15 @@ export default props =>{
         event.preventDefault();
         Axios.post(baseUrl, { email: userData.email, password: userData.password} )
             .then( response => {
-                setUserData(response.data);
+        
+                setUserData({
+                    ...userData,
+                    cpf: response.data.user.cpf,
+                    email: response.data.user.email,
+                    id: response.data.user.id,
+                    name: response.data.user.name,
+                });
+                localStorage.setItem('token', response.data.token);
                 history.push('/home');  
                 setUserErro(false)
                 setPasswordErro(false)
@@ -43,7 +51,7 @@ export default props =>{
 
     return (
         <Container>
-            <TextContainer margin='20px'>
+            <TextContainer>
                 <Typography  className={classes.text}>Entrar</Typography>
             </TextContainer>    
             <form className={classes.root} onSubmit={login}>
@@ -71,16 +79,17 @@ export default props =>{
                     value={userData.password}
                     onChange={onChange}
                 />
-                <Button 
+                <Button
+                    color='primary' 
                     variant='contained'
                     type='submmit'
                     >Logar</Button>
             </form>
-                <TextContainer margin='16px'>
+                <BottomTextContainer>
                 <Button onClick={() => history.push('/SignUp')}>
                     <Typography  className={classes.text}>Não possui cadastro? Clique aqui.</Typography>
                 </Button>
-                </TextContainer>    
+                </BottomTextContainer>    
         </Container>
     );
 

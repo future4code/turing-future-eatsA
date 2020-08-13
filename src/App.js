@@ -1,7 +1,11 @@
 import React, { useReducer } from 'react';
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import Home from './pages/Home';
-import SignUp from './components/SignUp/SignUp';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Address from './pages/Address';
+import Home from './pages/Home'
+
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
 import CartContext from './contexts/CartContext'
@@ -20,7 +24,16 @@ function App() {
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
             <Switch>
-              <Route exact path="/">
+              {/* <Route exact path="/">
+              <LandingPage />
+              </Route> */}
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/signUp/addres">
+                <Address />
+              </Route>
+              <Route exact path="/home">
                 <Home />
               </Route>
               <Route exact path="/signup">
@@ -42,6 +55,4 @@ function App() {
   );
 }
 
-export default App;
-
-/* <Restaurants /> */
+export default App
