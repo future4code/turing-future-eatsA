@@ -17,6 +17,7 @@ export default function CardFood(props) {
                     <Restaurante>{idx.name}</Restaurante>
                     <TempoDeEntrega>{idx.deliveryTime} min</TempoDeEntrega>
                     <TaxaDeEntrega>Frete: R${idx.shipping.toFixed(2)}</TaxaDeEntrega>
+                    <TaxaDeEntrega>Frete: R${idx.shipping.toFixed(2)}</TaxaDeEntrega>
                 </div>
             })}
         </Rectangle>
