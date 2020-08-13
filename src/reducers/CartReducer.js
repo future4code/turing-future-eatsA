@@ -2,6 +2,7 @@ export const initialState = {
     productsInCart: [],
     quantity: "",
     restaurant: [],
+    subTotal: ""
 }
 
 export const CartReducer = (state, action) => {
