@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Address from './pages/Address';
-import Home from './pages/Home'
 
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
