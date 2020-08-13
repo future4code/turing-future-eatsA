@@ -5,7 +5,7 @@ import { ContainerCartAddress, TituloDoContainer, InfoAddress } from './CartAddr
 
 import { UserContext } from '../../contexts/UserInforContext'
 
-import { token, baseUrl } from '../Restaurants/Restaurants'
+import { baseUrl } from '../Restaurants/Restaurants'
 
 function CartAddress() {
 
@@ -18,6 +18,7 @@ function CartAddress() {
     }, [])
 
     const getFullAddress = () => {
+        const token = window.localStorage.getItem("token")
         axios.get(`${baseUrl}profile/address`, {
             headers: {
                 auth: token
