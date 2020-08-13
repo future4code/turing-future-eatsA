@@ -14,8 +14,10 @@ export const user = {
         neighbourhood: "",
         city: "",
         state: "",
-        complement: ""
-}
+        complement: "",
+        confirmPassword: '',
+        password: '',
+    }
 
 
 

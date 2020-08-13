@@ -19,7 +19,7 @@ function App() {
   const [state, dispatch] = useReducer(CartReducer, initialState)
 
   return (
-    <UserContext.Provider value={{userData, onChangeUserData,setUserData}} >
+    <UserContext.Provider value={{userData, onChangeUserData,setUserData}} >     
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
             <Switch>
