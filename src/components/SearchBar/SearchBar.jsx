@@ -19,7 +19,7 @@ const SearchIcon = styled(SearchOutlinedIcon)`
     margin-left: 8px;
 `
 
-export default function SearchBar() {
+export default function SearchBar(props) {
 
     return (
         <Rectangle>

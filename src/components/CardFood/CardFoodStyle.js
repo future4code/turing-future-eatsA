@@ -12,7 +12,8 @@ export const CardInfo = styled.div`
 export const Image = styled.div`
     border-radius: 8px 8px 0px 0px;
     background-image: url(${props => props.bg});
-    background-size: cover;
+    background-size: 100%;
+    background-repeat: no-repeat;
     background-position: center;
     width: 100%;
     height: 7.5rem;
