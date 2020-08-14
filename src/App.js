@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Address from './pages/Address';
+import LandingPage from './components/LandingPage/LandingPage';
 
 
 import {UserContext, useUserInfo} from './contexts/UserInforContext'
@@ -13,6 +14,7 @@ import { initialState, CartReducer } from './reducers/CartReducer'
 
 import Restaurants from './components/Restaurants/Restaurants'
 import Cart from './components/Cart/Cart'
+import ProfilePage from './components/ProfilePage/ProfilePage';
 
 function App() {
   const {userData, onChangeUserData, setUserData} = useUserInfo();
@@ -23,9 +25,9 @@ function App() {
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
             <Switch>
-              {/* <Route exact path="/">
+              <Route exact path="/">
               <LandingPage />
-              </Route> */}
+              </Route>
               <Route exact path="/login">
                 <Login />
               </Route>
@@ -43,6 +45,9 @@ function App() {
               </Route>
               <Route exact path="/cart">
                 <Cart />
+              </Route>
+              <Route exact path="/profile">
+                <ProfilePage />
               </Route>
               <Route path="/">
                 <div>Opa! Erro 404!</div>

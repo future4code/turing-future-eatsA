@@ -7,8 +7,6 @@ width: 100vw;
 height: 15vh;
 display: flex;
 align-items: center;
-position: fixed;
-bottom: 0;
 `
 
 export const ContainerSchedule = styled.div

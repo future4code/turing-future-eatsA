@@ -68,3 +68,8 @@ export const ContainerCartGeral = styled.div
 display: flex;
 flex-direction: column;
 `
+export const CartContainer = styled.div
+`
+overflow: auto;
+height: 93vh;
+`

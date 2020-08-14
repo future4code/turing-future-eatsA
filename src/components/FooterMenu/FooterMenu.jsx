@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -23,15 +24,23 @@ const PersonIconActive = styled(PersonOutlineOutlinedIcon)`
 `
 
 export default function FooterMenu() {
+    const history = useHistory();
+
+    const goToHomePage = () => {
+        history.push("/home")
+    }
+    const goToCartPage = () => {
+        history.push("/cart")
+        }
+    const goToProfilePage = () => {
+        history.push("/profile")
+    }
 
     return (
         <FooterContainer>
-            <HomeIconActive />
-            {/* <HomeOutlinedIcon color={'disabled'}/> */}
-            {/* <ShoppingIconActive /> */}
-            <ShoppingCartOutlinedIcon color={'disabled'} />
-            {/* <PersonIconActive /> */}
-            <PersonOutlineOutlinedIcon color={'disabled'} />
+                {history.location.pathname === "/home" ? <HomeIconActive onClick={() => goToHomePage()} /> : <HomeOutlinedIcon color={'disabled'} onClick={() => goToHomePage()} />}
+                {history.location.pathname === "/cart" ? <ShoppingIconActive onClick={() => goToCartPage()} /> : <ShoppingCartOutlinedIcon color={'disabled'} onClick={() => goToCartPage()} />}
+                {history.location.pathname === "/profile" ? <PersonIconActive onClick={() => goToProfilePage()} /> : <PersonOutlineOutlinedIcon color={'disabled'}  onClick={() => goToProfilePage()} /> }
         </FooterContainer>
     )
 }
