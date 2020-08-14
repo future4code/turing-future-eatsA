@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
 export const Container = styled.div`
     display: flex;
@@ -42,4 +43,25 @@ export const InativeFilter = styled.button`
     outline: none;
     background: none;
     border: none;
+`
+export const CardActiveOrderContainer = styled.div`
+    position: fixed;
+    bottom: 7vh;
+`
+
+export const Rectangle = styled.div`
+    width: 90vw;
+    height: 8vh;
+    border-radius: 2px;
+    border: solid 1px lightgrey;
+    display: flex;
+    align-items: center;
+    margin: 8px 16px;
+`
+export const RastauranteInput = styled.input`
+    outline: none;
+    border: none;
+`
+export const SearchIcon = styled(SearchOutlinedIcon)`
+    margin-left: 8px;
 `

@@ -5,10 +5,14 @@ import { Image, Restaurante, TempoDeEntrega, TaxaDeEntrega, CardInfo } from '../
 
 export default function CardFood(props) {
     const history = useHistory();
+    
+  const goToRestaurantDetail = (idx) => {
+    history.push(`/restaurant/${idx}`)
+  }
 
     return (
         <div>
-            <CardInfo>
+            <CardInfo onClick={() => goToRestaurantDetail(props.restaurants.id)}>
                     {props.restaurants && <Image bg={props.restaurants.logoUrl} />}
                     <Restaurante>{props.restaurants.name}</Restaurante>
                     <TempoDeEntrega>{props.restaurants.deliveryTime} min</TempoDeEntrega>

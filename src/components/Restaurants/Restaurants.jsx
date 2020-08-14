@@ -10,6 +10,8 @@ import RestaurantListProducts from '../../contexts/RestaurantListProductsContext
 import CardRestaurant from './CardRestaurant'
 import CardProducts from './CardProducts'
 import CardActiveOrder from './CardActiveOrder'
+import FooterMenu from '../../components/FooterMenu/FooterMenu'
+import { ContainerRestaurant } from './RestaurantsStyle'
 
 export const baseUrl = "https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/"
  
@@ -56,9 +58,12 @@ function Restaurants() {
     return (
         <RestaurantDetailsContext.Provider value={state.restaurantDetails}>
             <RestaurantListProducts.Provider value={state.restaurantProducts}>
-                <CardRestaurant />
-                <CardProducts />
-                <CardActiveOrder />
+                <ContainerRestaurant>
+                    <CardRestaurant />
+                    <CardProducts />
+                    <CardActiveOrder />
+                </ContainerRestaurant>
+                <FooterMenu />
             </RestaurantListProducts.Provider>
         </RestaurantDetailsContext.Provider>
     )

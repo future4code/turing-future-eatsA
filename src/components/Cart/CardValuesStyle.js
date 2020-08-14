@@ -9,7 +9,7 @@ flex-direction: column;
 
 export const Frete = styled.p
 `
-width: 100vw;
+width: 90vw;
 margin: 0;
 display: flex;
 justify-content: flex-end;
@@ -17,8 +17,8 @@ justify-content: flex-end;
 
 export const SubTotal = styled.div
 `
-margin: 0 0 0 4.4vw;
-width: 95.5vw;
+margin-left: 6vw;
+width: 85vw;
 display: flex;
 justify-content: space-between;
 align-items: center;

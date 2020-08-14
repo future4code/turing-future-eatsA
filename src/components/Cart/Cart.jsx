@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { ContainerCartGeral } from './CartStyle'
+import { ContainerCartGeral, CartContainer } from './CartStyle'
 
 import CartAddress from './CartAddress'
 import CartRestaurant from './CartRestaurant'
 import CartValues from './CartValues'
 import CartPayment from './CartPayment'
 import CartRenderProducts from './CartRenderProducts'
+import FooterMenu from '../FooterMenu/FooterMenu'
 
 function Cart() {
 
@@ -22,11 +23,14 @@ function Cart() {
 
     return(
         <ContainerCartGeral data-testid={"cart"}>
-            <CartAddress />
-            <CartRestaurant />
-            <CartRenderProducts /> 
-            <CartValues />
-            <CartPayment />
+            <CartContainer>
+                <CartAddress />
+                <CartRestaurant />
+                <CartRenderProducts /> 
+                <CartValues />
+                <CartPayment />
+            </CartContainer>
+            <FooterMenu />
         </ContainerCartGeral>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useContext }  from 'react';
+import React, { useContext, useEffect }  from 'react';
 import Axios from 'axios';
 
 import {UserContext}  from '../../contexts/UserInforContext'
@@ -17,7 +17,15 @@ export default props =>{
     const {userData, onChangeUserData, setUserData} = useContext(UserContext);
     const [userErro, setUserErro ] = useState(false);
     const [passwordErro, setPasswordErro ] = useState(false);
-    const classes = useStyles();
+    const classes = useStyles(); 
+    
+    useEffect(() => {
+        const token = window.localStorage.getItem("token")
+    
+        if (token !== null) {
+          history.push("/home")
+        }
+      }, [history])
     
     const login = event =>{
         event.preventDefault();
