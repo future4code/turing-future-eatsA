@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const Rectangle = styled.div`
+
+export const CardInfo = styled.div`
     width: 328px;
     height: 188px;
     border-radius: 8px;
@@ -8,11 +9,13 @@ export const Rectangle = styled.div`
     padding-bottom: 8px;
     margin: 4px;
 `
-export const Image = styled.img`
-    width: 328px;
-    height: 120px;
-    object-fit: contain;
+export const Image = styled.div`
     border-radius: 8px 8px 0px 0px;
+    background-image: url(${props => props.bg});
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 7.5rem;
 `
 export const Restaurante = styled.p`
     width: 296px;

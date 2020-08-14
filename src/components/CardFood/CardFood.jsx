@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { Rectangle, Image, Restaurante, TempoDeEntrega, TaxaDeEntrega } from '../CardFood/CardFoodStyle'
+import { Image, Restaurante, TempoDeEntrega, TaxaDeEntrega, CardInfo } from '../CardFood/CardFoodStyle'
 
 
 export default function CardFood(props) {
@@ -10,16 +10,15 @@ export default function CardFood(props) {
     console.log(restaurantsList)
 
     return (
-        <Rectangle>
+        <div>
             {restaurantsList.map((idx) => {
-                return <div>
-                    <Image src={idx.logoUrl} />
+                return <CardInfo>
+                    {idx.logoUrl && <Image bg={idx.logoUrl} />}
                     <Restaurante>{idx.name}</Restaurante>
                     <TempoDeEntrega>{idx.deliveryTime} min</TempoDeEntrega>
                     <TaxaDeEntrega>Frete: R${idx.shipping.toFixed(2)}</TaxaDeEntrega>
-                    <TaxaDeEntrega>Frete: R${idx.shipping.toFixed(2)}</TaxaDeEntrega>
-                </div>
+                </CardInfo>
             })}
-        </Rectangle>
+        </div>
     )
 }
