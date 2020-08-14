@@ -1,9 +1,16 @@
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 
-export const ContainerCartPayment = styled.div
+export const Container = styled.div
 `
 width: 100vw;
+display: flex;
+justify-content: center;
+`
+
+export const ContainerCartPayment = styled.div
+`
+width: 83.3vw;
 display: flex;
 flex-direction: column;
 `

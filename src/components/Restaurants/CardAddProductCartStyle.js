@@ -8,7 +8,7 @@ color: #5cb646;
 
 export const Frase = styled.h5
 `
-width: 82.2vw;
+width: 100vw;
 height: 2.03vh;
 margin: 5.50vh 0 0 0;
 font-family: Roboto;
@@ -18,6 +18,7 @@ font-stretch: normal;
 font-style: normal;
 line-height: normal;
 letter-spacing: -0.39px;
-text-align: center;
+display: flex;
+align-self: center;
 color: #000000;
 `

@@ -80,16 +80,22 @@ function CardProducts() {
     }
 
     const onClickCloseAddCart = (quantity) => {
+        console.log(cartContext.state.restaurant.id, restaurantDetails.id)
         setWindowAddItemCart(false)
-        if (quantity > 0) {
-            const addProductInCart = {
-                type: "ADD_PRODUCT_TO_CART",
-                product: product,
-                quantity: quantity,
-                restaurant: restaurantDetails
+        if (cartContext.state.restaurant.id === restaurantDetails.id || cartContext.state.restaurant.id === undefined) {
+            if (quantity > 0) {
+                const addProductInCart = {
+                    type: "ADD_PRODUCT_TO_CART",
+                    product: product,
+                    quantity: quantity,
+                    restaurant: restaurantDetails
+                }
+                dispatch(addProductInCart)
             }
-            dispatch(addProductInCart)
+        } else {
+            alert("Não é permitido pedir em dois restaurantes ao mesmo tempo")
         }
+        
     }
 
     const renderizaNaTela = () => {

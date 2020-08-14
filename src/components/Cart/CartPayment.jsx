@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 
-import { ContainerCartPayment, Titulo, BotaoConfirmar } from './CartPaymentStyle'
+import { Container, ContainerCartPayment, Titulo, BotaoConfirmar } from './CartPaymentStyle'
 
 import { baseUrl } from  '../Restaurants/Restaurants'
 
@@ -81,7 +81,7 @@ function CartPayment() {
         clearCart()
       })
       .catch((error) => {
-        alert(error.message)
+        alert("Ops, você já pediu ou estamos com problema")
       })
     }
 
@@ -94,17 +94,20 @@ function CartPayment() {
 
     return (
         <MuiThemeProvider theme={tema}>
-          <ContainerCartPayment>
-            <Titulo>Forma de Pagamento</Titulo>
-            <hr></hr>
-            <FormControl component="fieldset">
-              <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                  <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
-                  <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-              </RadioGroup>
-            </FormControl>
-            <BotaoConfirmar color="secondary" variant="contained" onClick={() => onClickOrder(value)}>Confirmar</BotaoConfirmar>
-          </ContainerCartPayment>
+          <Container>
+            <ContainerCartPayment>
+
+              <FormControl component="fieldset">
+                <Titulo>Forma de Pagamento</Titulo>
+                <hr></hr>
+                <RadioGroup data-testid="selecao" aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                    <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+                    <FormControlLabel data-testid="dinheiro" value="money" control={<Radio />} label="Dinheiro" />
+                </RadioGroup>
+              </FormControl>
+              <BotaoConfirmar color="secondary" variant="contained" onClick={() => onClickOrder(value)}>Confirmar</BotaoConfirmar>
+            </ContainerCartPayment>            
+          </Container>
         </MuiThemeProvider>
     )
 }

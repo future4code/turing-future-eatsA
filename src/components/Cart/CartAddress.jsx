@@ -37,7 +37,7 @@ function CartAddress() {
     return (
         <ContainerCartAddress>
             <TituloDoContainer>Endereço de entrega</TituloDoContainer>
-            <InfoAddress>{street}, {number}</InfoAddress>
+            <InfoAddress data-testid={"address"}>{street}, {number}</InfoAddress>
         </ContainerCartAddress>
     )
 }

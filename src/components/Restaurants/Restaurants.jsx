@@ -23,6 +23,13 @@ function Restaurants() {
         getRestaurantDetail()
     }, [])
 
+    useEffect(() => {
+        const token = window.localStorage.getItem("token")
+        if (token === null) {
+            history.push("/login")
+        }
+    }, [history])
+
     const getRestaurantDetail = () => {
         const token = window.localStorage.getItem("token")
         axios.get(`${baseUrl}restaurants/${pathParams.id}`, {
