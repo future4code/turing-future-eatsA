@@ -6,14 +6,13 @@ import CartContext from '../../contexts/CartContext'
 
 function CardRestaurant() {
 
-    const cardContext = useContext(CartContext)
-    const dispatch = cardContext.dispatch
+    const cartContext = useContext(CartContext)
 
     return (
         <ContainerRestaurante>
-            <NomeDoRestaurante>{cardContext.state.restaurant.name}</NomeDoRestaurante>
-            <InfoDoRestaurante>{cardContext.state.restaurant.address}</InfoDoRestaurante>
-            <InfoDoRestaurante>{cardContext.state.restaurant.deliveryTime}</InfoDoRestaurante>
+            <NomeDoRestaurante>{cartContext.state.restaurant.name}</NomeDoRestaurante>
+            <InfoDoRestaurante>{cartContext.state.restaurant.address}</InfoDoRestaurante>
+            <InfoDoRestaurante>{cartContext.state.restaurant.deliveryTime}</InfoDoRestaurante>
         </ContainerRestaurante>
     )
 }

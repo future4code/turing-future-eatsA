@@ -21,11 +21,17 @@ function CardProducts() {
     const [categorys, setCategorys] = useState([])
     const [product, setProduct] = useState({})
     const [listProducts, setListProducts] = useState([])
-    const [windowAddItemCart, setWindowAddItemCart] = useState(false) 
+    const [windowAddItemCart, setWindowAddItemCart] = useState(false)
 
     useEffect(() => {
         pegaCategorias()
     }, [restaurantProducts])
+
+    useEffect(() => {
+        window.localStorage.setItem("cart", JSON.stringify(cartContext.state.productsInCart))
+        window.localStorage.setItem("restaurant", JSON.stringify(cartContext.state.restaurant))
+        verificaComOCarrinho() 
+    }, [cartContext.state.productsInCart])
 
     const pegaCategorias = () => {
         const arrayPegaCategorias = []
@@ -36,36 +42,33 @@ function CardProducts() {
 
         const arrayRemoveRepetidos = [ ...new Set(arrayPegaCategorias) ]
         setCategorys(arrayRemoveRepetidos)
+        
         verificaComOCarrinho()
     }
 
-    useEffect(() => {
-        verificaComOCarrinho()
-    }, [cartContext.state.productsInCart])
-
     const verificaComOCarrinho = () => {
-        if (cartContext.state.productsInCart.length > 0) {
-            let arrayPegaTudo = []
-            cartContext.state.productsInCart.map((product) => {
-                arrayPegaTudo.push(product)
-            })
-            
-            restaurantProducts.map((product) => {
-                arrayPegaTudo.push(product)
-            })
-
-            arrayPegaTudo.map((product, index) => {
-                 arrayPegaTudo.map((prod, ind) => {
-                    if ((product.id === prod.id) && (index !== ind)) {
-                        if ((product.quantity === undefined) && (prod.quantify === undefined)) {
-                            arrayPegaTudo.splice(index, 1)
-                        } else if ((prod.quantity === undefined) && (product.quantify === undefined)){
-                            arrayPegaTudo.splice(ind, 1)
-                        }
-                    }
+            if (cartContext.state.productsInCart.length > 0) {
+                let arrayPegaTudo = []
+                cartContext.state.productsInCart.map((product) => {
+                    arrayPegaTudo.push(product)
                 })
-            })
-            setListProducts(arrayPegaTudo)
+                
+                restaurantProducts.map((product) => {
+                    arrayPegaTudo.push(product)
+                })
+    
+                arrayPegaTudo.map((product, index) => {
+                     arrayPegaTudo.map((prod, ind) => {
+                        if ((product.id === prod.id) && (index !== ind)) {
+                            if ((product.quantity === undefined) && (prod.quantify === undefined)) {
+                                arrayPegaTudo.splice(index, 1)
+                            } else if ((prod.quantity === undefined) && (product.quantify === undefined)){
+                                arrayPegaTudo.splice(ind, 1)
+                            }
+                        }
+                    })
+                })
+                setListProducts(arrayPegaTudo)
         } else {
             setListProducts(restaurantProducts)
         }
@@ -77,16 +80,22 @@ function CardProducts() {
     }
 
     const onClickCloseAddCart = (quantity) => {
+        console.log(cartContext.state.restaurant.id, restaurantDetails.id)
         setWindowAddItemCart(false)
-        if (quantity > 0) {
-            const addProductInCart = {
-                type: "ADD_PRODUCT_TO_CART",
-                product: product,
-                quantity: quantity,
-                restaurant: restaurantDetails
+        if (cartContext.state.restaurant.id === restaurantDetails.id || cartContext.state.restaurant.id === undefined) {
+            if (quantity > 0) {
+                const addProductInCart = {
+                    type: "ADD_PRODUCT_TO_CART",
+                    product: product,
+                    quantity: quantity,
+                    restaurant: restaurantDetails
+                }
+                dispatch(addProductInCart)
             }
-            dispatch(addProductInCart)
+        } else {
+            alert("Não é permitido pedir em dois restaurantes ao mesmo tempo")
         }
+        
     }
 
     const renderizaNaTela = () => {
@@ -124,7 +133,7 @@ function CardProducts() {
                                         <ContainerInfoProduct>
                                             <TituloDoProduto>{product.name}</TituloDoProduto>
                                             <DescricaoDoProduto>{product.description}</DescricaoDoProduto>
-                                            <PrecoDoProduto>R$ {product.price}</PrecoDoProduto>
+                                            <PrecoDoProduto>R$ {product.price.toFixed(2)}</PrecoDoProduto>
                                         </ContainerInfoProduct>
                                         {product.quantity === undefined ? 
                                         <BotaoAdicionarProduto onClick={() => onClickAddCart(product)}>

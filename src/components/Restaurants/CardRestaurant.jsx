@@ -15,7 +15,7 @@ function CardRestaurant() {
             <InfoDoRestaurante>{restaurantDetails.category}</InfoDoRestaurante>
             <ContainerValores>
                 <InfoDoRestaurante>{restaurantDetails.deliveryTime} min</InfoDoRestaurante>
-                <InfoDoRestaurante>Frete R$ {restaurantDetails.shipping},00</InfoDoRestaurante>
+                <InfoDoRestaurante>Frete R$ {Number(restaurantDetails.shipping).toFixed(2)}</InfoDoRestaurante>
             </ContainerValores>
             <InfoDoRestaurante>{restaurantDetails.address}</InfoDoRestaurante>
         </ContainerRestaurante>

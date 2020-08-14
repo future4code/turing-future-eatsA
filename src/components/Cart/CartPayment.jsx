@@ -1,27 +1,17 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 
-import { ContainerCartPayment, Titulo, BotaoConfirmar } from './CartPaymentStyle'
+import { Container, ContainerCartPayment, Titulo, BotaoConfirmar } from './CartPaymentStyle'
 
 import { baseUrl } from  '../Restaurants/Restaurants'
 
 import CartContext from '../../contexts/CartContext'
 
-import { makeStyles } from '@material-ui/core/styles'
-import {createMuiTheme, MuiThemeProvider } from "@material-ui/core"
+import {createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(3)
-    },
-    button: {
-      margin: theme.spacing(1, 1, 0, 0)
-    }
-}))
 
 const tema = createMuiTheme({
     palette: {
@@ -36,74 +26,88 @@ const tema = createMuiTheme({
 
 function CartPayment() {
 
-    const classes = useStyles()
-    const [value, setValue] = useState("")
     const cartContext = useContext(CartContext)
+    const dispatch = cartContext.dispatch
+    const [value, setValue] = useState("")
+    const [order, setOrder] = useState([])
 
-    console.log(cartContext.state.productsInCart)
+    useEffect(() => {
+      window.localStorage.setItem("cart", JSON.stringify(cartContext.state.productsInCart))
+      window.localStorage.setItem("restaurant", JSON.stringify(cartContext.state.restaurant))
+      listOfOrder()
+    }, [cartContext.state.productsInCart])
+
+    const listOfOrder = () => {
+      let array = []
+
+      cartContext.state.productsInCart.forEach((product) => {
+        const indice = {
+          "id": product.id,
+          "quantity": product.quantity
+        }
+        array.push(indice)
+        setOrder(array)
+      })
+    }
   
-    const handleRadioChange = (event) => {
+    const handleChange = (event) => {
       setValue(event.target.value)
     }
-  
-    const handleSubmit = (event) => {
-        console.log(value)
-        event.preventDefault()
+
+    const onClickOrder = (value) => {
+      if (value !== "") {
+        postPlaceOrder()
+      }
     }
 
-    const postPlaceOrder = () => {
-
+      const postPlaceOrder = () => {
       const token = window.localStorage.getItem("token")
-
-      const products = () => {
-        let array = []
-        cartContext.state.productsInCart.map((product) => {
-          array.push(product.id, product.quantity)
-        })
-        console.log(array)
-      }
-      
-      products()
+      const idDoRestaurante = cartContext.state.restaurant.id
 
       const body = {
-        "products": [{
-          "id": "CnKdjU6CyKakQDGHzNln",
-          "quantity": 10
-        }, {
-          "quantity": 1,
-          "id": "KJqMl2DxeShkSBevKVre"
-        }],
-        "paymentMethod": "creditcard"
+        "products": order,
+        "paymentMethod": `${value}`
       }
 
-      axios.post(`${baseUrl}restaurants/:restaurantId/order`, body, {
+      console.log(body)
+
+      axios.post(`${baseUrl}restaurants/${idDoRestaurante}/order`, body, {
         headers: {
           auth: token
         }
       })
       .then((response) => {
-        
+        setValue("")
+        clearCart()
       })
       .catch((error) => {
-        alert(error.message)
+        alert("Ops, você já pediu ou estamos com problema")
       })
+    }
+
+    const clearCart = () => {
+      const clearCart = {
+        type: "CLEAR_PRODUCTS_IN_CART",
+      }
+      dispatch(clearCart)
     }
 
     return (
         <MuiThemeProvider theme={tema}>
-            <ContainerCartPayment onSubmit={() => handleSubmit(value)}>
-                <FormControl component="fieldset" className={classes.formControl}>
-                    <Titulo>Forma de pagamento</Titulo>
-                    <hr></hr>
-                    <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                        <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-                        <FormControlLabel value="card" control={<Radio />} label="Cartão de crédito"/>
-                    </RadioGroup>
-                </FormControl>
-                <BotaoConfirmar type="submit" variant="contained" color="secondary" className={classes.button}>
-                    Confirmar
-                </BotaoConfirmar>
-            </ContainerCartPayment>
+          <Container>
+            <ContainerCartPayment>
+
+              <FormControl component="fieldset">
+                <Titulo>Forma de Pagamento</Titulo>
+                <hr></hr>
+                <RadioGroup data-testid="selecao" aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+                    <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+                    <FormControlLabel data-testid="dinheiro" value="money" control={<Radio />} label="Dinheiro" />
+                </RadioGroup>
+              </FormControl>
+              <BotaoConfirmar color="secondary" variant="contained" onClick={() => onClickOrder(value)}>Confirmar</BotaoConfirmar>
+            </ContainerCartPayment>            
+          </Container>
         </MuiThemeProvider>
     )
 }

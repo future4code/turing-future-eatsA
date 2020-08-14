@@ -1,4 +1,5 @@
-import React, { useContext, useReducer } from 'react'
+import React, { useContext, useReducer, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { BotaoRemover, Quantidade, ContainerCart, ContainerCarrinhoVazio } from './CartStyle'
 import { ContainerProduct, ImagemDoProduto, ContainerInfoProduct, TituloDoProduto, DescricaoDoProduto, PrecoDoProduto } from '../Restaurants/CardProductsStyle'
@@ -9,7 +10,13 @@ function CartRenderProducts() {
 
     const cartContext = useContext(CartContext)
     const dispatch = cartContext.dispatch
+    const history = useHistory()
 
+    useEffect(() => {
+        window.localStorage.setItem("cart", JSON.stringify(cartContext.state.productsInCart))
+        window.localStorage.setItem("restaurant", JSON.stringify(cartContext.state.restaurant))
+    }, [cartContext.state.productsInCart])
+    
     const onClickRemoveProduct = (product) => {
         const removeProduct = {
             type: "RM_PRODUCT_IN_CART",
@@ -19,7 +26,13 @@ function CartRenderProducts() {
     }
 
     const renderizaNaTela = () => {
-        if (cartContext.state.productsInCart.length > 0) {
+        if (cartContext.state.productsInCart.length === 0){
+            return (
+                <ContainerCarrinhoVazio>
+                    Carrinho vazio
+                </ContainerCarrinhoVazio>
+            )
+        } else {
             return (
                 <ContainerCart>
                     {cartContext.state.productsInCart.map((product) => {
@@ -31,7 +44,7 @@ function CartRenderProducts() {
                                 <ContainerInfoProduct>
                                     <TituloDoProduto>{product.name}</TituloDoProduto>
                                     <DescricaoDoProduto>{product.description}</DescricaoDoProduto>
-                                    <PrecoDoProduto>R$ {product.price}</PrecoDoProduto>
+                                    <PrecoDoProduto>R$ {product.price.toFixed(2)}</PrecoDoProduto>
                                 </ContainerInfoProduct>
                                 <div>
                                     <Quantidade>{product.quantity}</Quantidade>
@@ -41,12 +54,6 @@ function CartRenderProducts() {
                         )
                     })}
                 </ContainerCart>
-            )
-        } else {
-            return (
-                <ContainerCarrinhoVazio>
-                    Carrinho vazio
-                </ContainerCarrinhoVazio>
             )
         }
     }

@@ -10,28 +10,28 @@ function CartValues() {
     const [subTotal, setSubTotal] = useState(0)
 
     useEffect(() => {
-        if (cartContext.state.productsInCart.length !== 0) {
-            setValue()
-        } else {
-            setSubTotal(0)
-        }
+        setValue()
     }, [cartContext.state.productsInCart])
     
     const setValue = () => {
-        let result = 0
-        cartContext.state.productsInCart.map((product) => {
-            result = result + (product.price * product.quantity)
-        })
-        result = result + cartContext.state.restaurant.shipping
-        setSubTotal(result)
+        if (cartContext.state.productsInCart.length > 0) {
+            let result = 0
+            cartContext.state.productsInCart.map((product) => {
+                result = result + (product.price * product.quantity)
+            })
+            result = result + cartContext.state.restaurant.shipping
+            setSubTotal(result)
+        } else {
+            setSubTotal(0)
+        }
     }
 
     return (
         <ContainerCartValues>
-            <Frete>Frete R${cartContext.state.restaurant.shipping > 0 ? cartContext.state.restaurant.shipping : "0, 00"}</Frete>
+            <Frete>Frete R${cartContext.state.restaurant.shipping > 0 ? cartContext.state.restaurant.shipping.toFixed(2) : "0, 00"}</Frete>
             <SubTotal>
                 <p>SUBTOTAL</p>
-                <p>R$ {subTotal}</p>
+                <p>R$ {subTotal.toFixed(2)}</p>
             </SubTotal>
         </ContainerCartValues>
     )
